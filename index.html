@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body>
+    <button onclick="myFunction()">Click here to Flatten object</button>
+    <p>View Output in Console</p>
+
+    <script>
+      function flatten(data) {
+        var output = {};
+        for (var i in data) {
+          if (typeof data[i] == "object") {
+            var flatObject = flatten(data[i]);
+            for (var x in flatObject) {
+              output[i + "." + x] = flatObject[x];
+            }
+          } else {
+            output[i] = data[i];
+          }
+        }
+        return output;
+      }
+
+      const myFunction = () => {
+        var obj = {
+          key1: { key1: 5, key2: ["hi", "friend", 6] },
+          key2: undefined,
+          key3: { key1: { key2: { key3: "done" } } },
+        };
+
+        console.log(flatten(obj));
+      };
+    </script>
+  </body>
+</html>
